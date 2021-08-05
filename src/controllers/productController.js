@@ -97,7 +97,6 @@ const deleteProduct = async (req, res) => {
       data,
     });
   } catch (e) {
-    console.log(e);
     return res.status(500).json({
       message: e,
     });
@@ -109,24 +108,6 @@ const uploadProductImage = async (req, res) => {
     const { status, data } = await uploadService.uploadFile(req);
     res.status(status).json({
       data,
-    });
-  } catch (e) {
-    return res.status(500).json({
-      message: e,
-    });
-  }
-};
-
-const deleteProductImage = async (req, res) => {
-  try {
-    const { name } = req.body;
-    await uploadService.destroyFile(
-      `${process.cwd()}/public/${req.appid}/${name}`
-    );
-    res.status(200).json({
-      data: {
-        status: "ok",
-      },
     });
   } catch (e) {
     return res.status(500).json({
